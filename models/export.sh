@@ -1,6 +1,7 @@
 #!/bin/sh
-dir_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P ) # https://stackoverflow.com/a/24112741
+current_dir=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P ) # https://stackoverflow.com/a/24112741
 
+output_dir="${1:-$current_dir/../../assets/models}" 
 
 # Check if Blender is not installed
 if ! command -v blender >/dev/null 2>&1; then
@@ -10,5 +11,5 @@ fi
 
 # Blender is installed, so run Blender with Python script
 echo "found Blender! Exporting models..."
-blender -b -P "$dir_path/export.py" -- -i "$dir_path" -o "$dir_path/../../build/assets/models"
+blender -b -P "$current_dir/export.py" -- -i "$current_dir" -o "$output_dir"
 echo "Done!"
